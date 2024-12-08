@@ -29,8 +29,8 @@ A service for detecting form templates based on field types. The API accepts for
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/imelbow/FormMatcher.git
+cd FormMatcher
 ```
 
 2. Copy the sample configuration file `config.yaml.sample` to `config.yaml`:
@@ -152,8 +152,8 @@ mongodb:
 
 1. Клонируйте репозиторий:
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/imelbow/FormMatcher.git
+cd FormMatcher
 ```
 
 2. Скопируйте пример конфигурационного файла `config.yaml.sample` в `config.yaml`:
