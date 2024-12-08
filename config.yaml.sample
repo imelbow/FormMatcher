@@ -1,0 +1,14 @@
+mongodb:
+  dsn: mongodb://login:password@mongodb:27017/forms_db?authSource=admin
+
+  templates:
+    - name: Contact form
+      fields:
+        email: email
+        phone: phone
+
+    - name: Registration
+      fields:
+        user_email: email
+        birth_date: date
+        phone_number: phone

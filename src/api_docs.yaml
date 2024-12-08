@@ -1,0 +1,120 @@
+openapi: 3.0.0
+info:
+  title: Form Template Matcher API
+  description: |
+    API for determining form templates based on field types.
+
+    The service accepts form data and determines:
+    * Matching form template
+    * Types of all fields if no template is found
+  version: 1.0.0
+
+tags:
+  - name: forms
+    description: Operations with forms and templates
+
+get_form:
+  tags:
+    - forms
+  summary: Determine form template
+  description: |
+    Accepts form data and determines the corresponding template.
+    
+    Supports two data formats:
+    * multipart/form-data
+    * application/json
+  requestBody:
+    required: true
+    content:
+      multipart/form-data:
+        schema:
+          $ref: '#/components/schemas/FormData'
+        examples:
+          contact_form:
+            summary: Contact Form Example
+            value:
+              email: "test@example.com"
+              phone: "+7 999 999 99 99"
+          registration_form:
+            summary: Registration Form Example
+            value:
+              user_email: "user@example.com"
+              birth_date: "2024-01-01"
+              phone_number: "+7 999 999 99 99"
+          custom_form:
+            summary: Custom Form Example
+            value:
+              email: "test@example.com"
+              phone: "+7 999 999 99 99"
+              message: "Test message"
+              subject: "Email subject"
+      application/json:
+        schema:
+          $ref: '#/components/schemas/FormData'
+        examples:
+          contact_form:
+            summary: Contact Form Example
+            value:
+              email: "test@example.com"
+              phone: "+7 999 999 99 99"
+          registration_form:
+            summary: Registration Form Example
+            value:
+              user_email: "user@example.com"
+              birth_date: "2024-01-01"
+              phone_number: "+7 999 999 99 99"
+          custom_form:
+            summary: Custom Form Example
+            value:
+              email: "test@example.com"
+              phone: "+7 999 999 99 99"
+              message: "Test message"
+              subject: "Email subject"
+  responses:
+    '200':
+      description: Successfully determined form
+      content:
+        application/json:
+          schema:
+            oneOf:
+              - type: object
+                properties:
+                  template_name:
+                    type: string
+                    example: "Contact form"
+                required:
+                  - template_name
+              - type: object
+                additionalProperties:
+                  type: string
+                  example: "email"
+          examples:
+            template_found:
+              summary: Template found
+              value:
+                template_name: "Contact form"
+            field_types:
+              summary: Field types determined
+              value:
+                email: "email"
+                phone: "phone"
+                message: "text"
+    '415':
+      description: |
+        Unsupported Media Type. API supports following formats:
+        * application/json
+        * multipart/form-data
+        * application/x-www-form-urlencoded
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+                example: "Unsupported media type. Use application/json, multipart/form-data or application/x-www-form-urlencoded"
+          examples:
+            error_response:
+              summary: Invalid Content-Type Error
+              value:
+                error: "Unsupported media type. Use application/json, multipart/form-data or application/x-www-form-urlencoded"

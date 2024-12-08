@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+.env
+.venv/
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+
+# Docker
+mongodb_data/
+
+# Configs
+config.yaml
+
+# Logs
+*.log
+
+# Tests
+.coverage
+htmlcov/
+# Sensitive data
+*.pem
+*.key
+*credentials*
+secrets/
+
+# Local development
+local_settings.py
+
